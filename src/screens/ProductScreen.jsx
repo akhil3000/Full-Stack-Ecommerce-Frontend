@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { Form} from 'react-bootstrap';
 import Rating from "../components/Rating";
 import {useDispatch} from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -18,8 +19,9 @@ const ProductScreen=()=>{
     const [qty,setQty]=useState(1);
 
     const addToCartHandler=()=>{
-
-
+       
+      dispatch(addToCart({...product,qty}));
+      navigate('/cart');
     }  
 
     const{data:product,isLoading,error}=useGetProductDetailsQuery(productId);
